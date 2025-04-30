@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oxigenemos Hermosillo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #111;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: orange;
+    }
+
+    .hero {
+      background: linear-gradient(45deg, orange, white);
+      padding: 4rem 2rem;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .btn {
+      margin-top: 2rem;
+      background-color: #111;
+      color: white;
+      padding: 1rem 2rem;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background-color: orange;
+    }
+
+    .matriz {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+
+    .matriz h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 90%;
+      margin: auto;
+      border-collapse: collapse;
+      font-size: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      background-color: white;
+    }
+
+    th {
+      background-color: orange;
+      color: white;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: orange;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Riego Profundo</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="propuesta.html">Propuesta</a>
+      <a href="como-funciona.html">¿Cómo funciona?</a>
+      <a href="riego.html">Comparativa</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Oxigenemos Hermosillo</h2>
+    <p>El Parque Cárcamo, restaurado por el municipio, está lleno de vida: árboles que podrían florecer aún más con un sistema de riego eficiente. Hoy, muchas zonas presentan fugas, deshidratación y un desperdicio silencioso. Es momento de actuar por el verde de nuestra ciudad.</p>
+    <a class="btn" href="propuesta.html">Ver la propuesta</a>
+  </section>
+
+  <section class="matriz">
+    <h3>Comparativa: Drip vs DRI</h3>
+    <table>
+      <tr>
+        <th>Aspecto</th>
+        <th>Riego por goteo (Drip)</th>
+        <th>Riego profundo (DRI)</th>
+      </tr>
+      <tr>
+        <td>Agua utilizada (por sesión)</td>
+        <td>18 galones</td>
+        <td>6 galones</td>
+      </tr>
+      <tr>
+        <td>Profundidad alcanzada (72hrs)</td>
+        <td>9 pulgadas</td>
+        <td>24 pulgadas</td>
+      </tr>
+      <tr>
+        <td>Duración de humedad</td>
+        <td>Baja</td>
+        <td>Alta</td>
+      </tr>
+      <tr>
+        <td>Porcentaje de ahorro</td>
+        <td>-</td>
+        <td>66.7% menos agua</td>
+      </tr>
+      <tr>
+        <td>Oxigenación del suelo</td>
+        <td>Pobre</td>
+        <td>Alta</td>
+      </tr>
+    </table>
+    <p style="margin-top:2rem;">Fuente: <a href="https://www.hermosillo.gob.mx/parque-metropolitano/" target="_blank">Parque Metropolitano</a> y pruebas de DRI Technology</p>
+  </section>
+
+  <footer>
+    <p>Iniciativa ciudadana por un Hermosillo más verde · En colaboración con el <a href="https://www.hermosillo.gob.mx/" target="_blank">Ayuntamiento de Hermosillo</a></p>
+  </footer>
+
+  <!-- Scripts opcionales al final -->
+  <script>
+    // Animación suave al cargar
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.style.opacity = 0;
+        setTimeout(() => {
+          sec.style.transition = "opacity 1.5s ease-in";
+          sec.style.opacity = 1;
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>

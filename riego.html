@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparativa de Riego - DRI vs Drip</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: orange;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeIn 1.2s ease;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: orange;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .data-box {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-left: 6px solid orange;
+      margin-bottom: 2rem;
+    }
+
+    .data-box ul {
+      padding-left: 1.2rem;
+    }
+
+    img {
+      max-width: 100%;
+      border: 2px solid #ddd;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    footer a {
+      color: orange;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Comparativa de Riego</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="propuesta.html">Propuesta</a>
+      <a href="como-funciona.html">¿Cómo funciona?</a>
+      <a href="riego.html">Comparativa</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Resultados de la prueba de 30 minutos</h2>
+    <p>Se realizó una prueba en campo con dos sistemas de riego: goteo tradicional (Drip) y riego profundo (DRI). Ambos usaron emisores de 1 galón por hora durante 30 minutos. Luego se excavó para observar la distribución del agua.</p>
+
+    <img src="img/DRD Cutaway Page 2.PNG" alt="Prueba DRI vs Drip">
+
+    <div class="data-box">
+      <h3>Resultados observados:</h3>
+      <ul>
+        <li><strong>DRI:</strong> Mayor zona de saturación y profundidad de riego (hasta 24 pulgadas)</li>
+        <li><strong>Drip:</strong> Saturación superficial limitada (poca profundidad)</li>
+        <li>Mismo tiempo, agua, ambiente y suelo</li>
+      </ul>
+    </div>
+
+    <div class="data-box">
+      <h3>Ahorro estimado:</h3>
+      <ul>
+        <li><strong>66.7% menos agua utilizada</strong> en promedio</li>
+        <li><strong>60% menos energía</strong> en bombeo, al reducir el uso de agua</li>
+        <li>Mayor absorción y menor desperdicio</li>
+      </ul>
+    </div>
+
+    <p>Estos resultados no solo demuestran una mejor eficiencia, sino también un ahorro económico y ecológico considerable. Es hora de modernizar el riego urbano.</p>
+  </section>
+
+  <footer>
+    <p>Innovación hídrica para Hermosillo · Con apoyo del <a href="https://www.hermosillo.gob.mx/" target="_blank">Ayuntamiento</a></p>
+  </footer>
+</body>
+</html>
