@@ -67,35 +67,31 @@
       font-size: 1.2rem;
     }
 
-    .nav-menu {
-      display: flex;
-      gap: 25px;
-    }
-
-    .nav-menu a {
-      text-decoration: none;
-      color: var(--color-dark);
-      font-weight: 400;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      position: relative;
-    }
-
-    .nav-menu a:after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: var(--color-primary);
-      transition: width 0.3s;
-    }
-
-    .nav-menu a:hover:after {
-      width: 100%;
-    }
+    .nav-pill {
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 5px;
+        }
+        
+        .nav-pill a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pill a.active {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+        
+        .nav-pill a:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
     .mobile-menu-btn {
       display: none;
@@ -314,22 +310,132 @@
       color: var(--color-primary);
       font-weight: 600;
     }
-
-    footer {
-      background-color: var(--color-secondary);
+/*CONTACTO*/
+    .contact-form {
+      background: rgb(255, 179, 64);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgb(118, 57, 20);
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      margin-bottom: 20px;
+      padding: 12px 20px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(129, 186, 162, 0.2);
+    }
+    
+    .btn-submit {
+      background: var(--secondary-color);
       color: white;
-      padding: 40px 20px;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+      background: var(--accent-color);
+      color: var(--primary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(129, 186, 162, 0.3);
+    }
+    
+
+    /* Footer */
+    .footer {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 80px 0 30px;
+    }
+    
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    
+    .footer-about {
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+    
+    .footer-links h5, .footer-contact h5 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+      color: white;
+    }
+    
+    .footer-links h5::after, .footer-contact h5::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      border-radius: 2px;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      font-size: 1.05rem;
+    }
+    
+    .footer-links a:hover {
+      color: var(--accent-color);
+      padding-left: 5px;
+    }
+    
+    .social-links a {
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 45px;
+      margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(129, 186, 162, 0.3);
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      margin-top: 40px;
       text-align: center;
     }
 
-    footer a {
-      color: var(--color-accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
 
     /* Media Queries */
     @media (max-width: 768px) {
@@ -399,7 +505,7 @@
 
   <section class="hero-animation">
     <div class="animation-layer bg-layer" style="background-image: url('imagess/fondo.png');"></div>
-    <div class="sun-layer" style="background-image: url('imagess/sol.png');"></div>
+    <img src="imagess/sol.png" alt="Sol" class="sun-layer">
     <div class="animation-layer city-layer" style="background-image: url('imagess/hmo.png');"></div>
   </section>
 
@@ -479,50 +585,80 @@
     </div>
   </section>
 
-  <section id="contacto" class="content-section light-section">
+  <!-- Contacto -->
+  <section id="contact" class="bg-light">
     <div class="container">
-      <h2 class="section-title">Contacto</h2>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Celular</th>
-              <th>Correo electrónico</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Ana Martínez</td>
-              <td>+52 55 1234 5678</td>
-              <td>ana.martinez@email.com</td>
-            </tr>
-            <tr>
-              <td>Juan López</td>
-              <td>+52 33 8765 4321</td>
-              <td>juan.lopez@email.com</td>
-            </tr>
-            <tr>
-              <td>María García</td>
-              <td>+52 81 2345 6789</td>
-              <td>maria.garcia@email.com</td>
-            </tr>
-            <tr>
-              <td>Carlos Pérez</td>
-              <td>+52 444 987 6543</td>
-              <td>carlos.perez@email.com</td>
-            </tr>
-          </tbody>
-        </table>
+      <h2 class="section-title text-center mb-5" data-i18n="Contáctanos">Contáctanos</h2>
+      <div class="row justify-content-between">
+        <div class="col-lg-6 mb-5 mb-lg-0 animate-on-scroll">
+          <form class="contact-form">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Tu nombre" data-i18n="Tu nombre" required />
+              </div>
+              <div class="col-md-6">
+                <input type="email" class="form-control" placeholder="Correo electrónico" data-i18n="Correo electrónico" required />
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Asunto" data-i18n="Asunto" />
+            <textarea rows="5" class="form-control" placeholder="Escribe tu mensaje..." data-i18n="Escribe tu mensaje..." required></textarea>
+            <button type="submit" class="btn btn-submit" data-i18n="Enviar Mensaje">Enviar Mensaje</button>
+          </form>
+        </div>
+        <div class="col-lg-5 animate-on-scroll">
+          <h4 class="mb-4" data-i18n="Información de Contacto">Información de Contacto</h4>
+          <div class="mb-4">
+            <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="Hermosillo, Sonora, México">Hermosillo, Sonora, México</span></p>
+            <p><i class="fas fa-phone"></i> <span data-i18n="+52 662 123 4567">+52 662 123 4567</span></p>
+            <p><i class="fas fa-envelope"></i> <span data-i18n="contacto@bluebasin.ai">contacto@bluebasin.ai</span></p>
+          </div>
+          <div class="map-container">
+            <iframe src="https://maps.google.com/maps?q=Hermosillo%20Sonora&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" allowfullscreen=""></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer>
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
-      <p>Iniciativa ciudadana por un Hermosillo más verde · En colaboración con el <a href="https://www.hermosillo.gob.mx/" target="_blank">Ayuntamiento de Hermosillo</a></p>
+      <div class="row">
+        <div class="col-md-4 mb-5 mb-lg-0">
+          <h5 data-i18n="Contacto">Contacto</h5>
+          <ul class="list-unstyled">
+            <li data-i18n="Email">Email</li>
+            <li data-i18n="Telefono">Teléfono</li>
+            <li data-i18n="Direccion">Dirección</li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-5 mb-lg-0">
+          <h5 data-i18n="Enlaces">Enlaces</h5>
+          <ul class="footer-links list-unstyled">
+            <li><a href="index.html" data-i18n="Inicio">Inicio</a></li>
+            <li><a href="propuesta.html" data-i18n="Propuesta">Propuesta</a></li>
+            <li><a href="comofunciona.html" data-i18n="¿Como funcionamos">¿Cómo funciona?</a></li>
+            <li><a href="riego.html" data-i18n="Riego">Riego</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 data-i18n="Horario">Horario</h5>
+          <ul class="list-unstyled">
+            <li data-i18n="Lunes-Viernes: 9:00 - 18:00">Lunes-Viernes: 9:00 - 18:00</li>
+          </ul>
+          <div class="social-links mt-3">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <small data-i18n="Todos los derechos reservados.">Todos los derechos reservados.</small>
+      </div>
     </div>
   </footer>
+
 
   <script>
     // Menú móvil
