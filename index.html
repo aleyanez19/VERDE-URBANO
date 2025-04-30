@@ -96,11 +96,6 @@
             transition: all 0.3s ease;
         }
         
-        .nav-pill a.active {
-            background: var(--white);
-            color: var(--primary-color);
-        }
-        
         .nav-pill a:hover:not(.active) {
             background: rgba(255, 255, 255, 0.1);
         }
@@ -109,24 +104,6 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .user-avatar:hover {
-            transform: scale(1.1);
         }
         
         .mobile-menu-btn {
@@ -143,7 +120,7 @@
         }
         
         .hero {
-            background: url('/api/placeholder/1200/600') center/cover;
+            background-color: #FFCC80;
             height: calc(100vh - var(--header-height));
             display: flex;
             align-items: center;
@@ -431,101 +408,6 @@
             margin-bottom: 0.8rem;
             font-family: 'Carl Sans', sans-serif;
         }
-        
-        /* Plantas nativas section */
-        .plantas-section {
-            background-color: var(--white);
-            padding: 5rem 2rem;
-            border-radius: 30px;
-            margin: 2rem auto;
-        }
-        
-        .plantas-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .planta-selector {
-            margin-bottom: 2.5rem;
-        }
-        
-        .planta-selector select {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid var(--light-accent);
-            border-radius: 15px;
-            font-size: 1rem;
-            background-color: var(--white);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        
-        .planta-selector select:focus {
-            border-color: var(--primary-color);
-        }
-        
-        .planta-info {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 2.5rem;
-            background-color: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
-        
-        .planta-carousel {
-            height: 450px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .carousel-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .planta-carousel:hover .carousel-img {
-            transform: scale(1.05);
-        }
-        
-        .planta-details {
-            padding: 2.5rem;
-        }
-        
-        .planta-details h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1.2rem;
-            font-size: 2rem;
-            font-family: 'Carl Sans', sans-serif;
-        }
-        
-        .planta-parametros {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .parametro-card {
-            background-color: var(--light-color);
-            padding: 1.2rem;
-            border-radius: 15px;
-            transition: transform 0.3s;
-        }
-        
-        .parametro-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .parametro-card h4 {
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            font-family: 'Carl Sans', sans-serif;
-        }
-
         /* Aplicación section */
         .aplicacion {
             background-color: var(--white);
@@ -1192,12 +1074,10 @@
                 <a href="propuesta.html">Propuesta</a>
                 <a href="comofunciona.html">¿Cómo funciona?</a>
                 <a href="riego.html">Riego</a>
+                <a href="plantas-nativas.html">Plantas Nativas</a>
               
             </nav>
             
-            <div class="user-menu">
-                <div class="user-avatar">JD</div>
-            </div>
             
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
@@ -1205,10 +1085,6 @@
         </div>
     </header>
         
-        <div class="user-menu">
-            <div class="user-avatar">JD</div>
-            <span>Juan Delgado</span>
-        </div>
     </div>
 
     <main>
@@ -1219,7 +1095,7 @@
                 
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <span class="hero-stat-number">66%</span>
+                        <span class="hero-stat-number">66.7%</span>
                         <span class="hero-stat-text">Menos agua</span>
                     </div>
                     <div class="hero-stat">
@@ -1234,7 +1110,7 @@
                 
                 <div class="hero-buttons">
                     <a href="propuesta.html" class="btn">Ver la propuesta</a>
-                    <a href="#contacto" class="btn btn-outline">Contactar</a>
+                    <a href="#Contacto" class="btn btn-outline">Contactar</a>
                 </div>
             </div>
         </section>
@@ -1281,7 +1157,42 @@
     <p style="margin-top:2rem;">Fuente: <a href="https://www.hermosillo.gob.mx/parque-metropolitano/" target="_blank">Parque Metropolitano</a> y pruebas de DRI Technology</p>
   </section>
 
-  <footer>
+  <footer id="contacto" style="background-color: #e3e2e0; padding: 20px;">
+    <h3>Contacto</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding: 8px;">Nombre</th>
+          <th style="text-align: left; padding: 8px;">Celular</th>
+          <th style="text-align: left; padding: 8px;">Correo electrónico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 8px;">Ana Martínez</td>
+          <td style="padding: 8px;">+52 55 1234 5678</td>
+          <td style="padding: 8px;">ana.martinez@email.com</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Juan López</td>
+          <td style="padding: 8px;">+52 33 8765 4321</td>
+          <td style="padding: 8px;">juan.lopez@email.com</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">María García</td>
+          <td style="padding: 8px;">+52 81 2345 6789</td>
+          <td style="padding: 8px;">maria.garcia@email.com</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px;">Carlos Pérez</td>
+          <td style="padding: 8px;">+52 444 987 6543</td>
+          <td style="padding: 8px;">carlos.perez@email.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </footer>
+  
+  
     <p>Iniciativa ciudadana por un Hermosillo más verde · En colaboración con el <a href="https://www.hermosillo.gob.mx/" target="_blank">Ayuntamiento de Hermosillo</a></p>
   </footer>
 

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plantas Nativas Perennes</title>
+  <style>
+    :root {
+      --color-fondo: #fff8f0;
+      --color-primario: #f97316;
+      --color-secundario: #fdba74;
+      --color-texto: #4b2e19;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+    }
+
+    header {
+      background: linear-gradient(45deg, var(--color-primario), var(--color-secundario));
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: var(--color-primario);
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav li ul {
+      display: none;
+      position: absolute;
+      background-color: var(--color-secundario);
+      top: 100%;
+      left: 0;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    nav li:hover ul {
+      display: block;
+    }
+
+    nav li ul li {
+      margin: 0.5rem 0;
+    }
+
+    main {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .selector {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    .info-planta {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 100%;
+      max-width: 600px;
+      display: none;
+    }
+
+    .info-planta img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .info-planta .contenido {
+      padding: 1rem;
+    }
+
+    .info-planta h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Plantas Nativas Perennes</h1>
+    <p>Selecciona una especie para ver sus características ecológicas</p>
+  </header>
+
+  <main>
+    <div class="selector">
+      <label for="plantaSelect">Elige una planta:</label>
+      <select id="plantaSelect" onchange="mostrarPlanta()">
+        <option value="">-- Selecciona --</option>
+        <option value="lavanda">Lavanda</option>
+        <option value="salvia">Salvia</option>
+        <option value="equinacea">Equinácea</option>
+        <option value="anacahuita">Anacahuita</option>
+        <option value="mezquite">Mezquite</option>
+      </select>
+    </div>
+
+    <div id="lavanda" class="info-planta">
+      <img src="https://images.unsplash.com/photo-1592861959345-704adad6df2a" alt="Lavanda">
+      <div class="contenido">
+        <h2>Lavanda</h2>
+        <p>Temperatura ideal: 15–30 °C. Suelo bien drenado. Necesita exposición solar directa. Muy resistente a la sequía.</p>
+      </div>
+    </div>
+
+    <div id="salvia" class="info-planta">
+      <img src="https://images.unsplash.com/photo-1635687152636-f24382aa743e" alt="Salvia">
+      <div class="contenido">
+        <h2>Salvia</h2>
+        <p>Climas templados a cálidos. Suelo arenoso, seco. Tolera sequías. Muy útil para polinizadores.</p>
+      </div>
+    </div>
+
+    <div id="equinacea" class="info-planta">
+      <img src="https://images.unsplash.com/photo-1622119486534-804d44a0e06f" alt="Equinácea">
+      <div class="contenido">
+        <h2>Equinácea</h2>
+        <p>Prefiere temperaturas entre 18 y 28 °C. Tolera heladas leves. Necesita suelo fértil y sol directo.</p>
+      </div>
+    </div>
+
+    <div id="anacahuita" class="info-planta">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Cordia_boissieri.jpg" alt="Anacahuita">
+      <div class="contenido">
+        <h2>Anacahuita</h2>
+        <p>Soporta hasta 40 °C, prefiere climas secos. Suelo arenoso o calizo. Muy ornamental y útil para fauna local.</p>
+      </div>
+    </div>
+
+    <div id="mezquite" class="info-planta">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Prosopis_laevigata_1.jpg" alt="Mezquite">
+      <div class="contenido">
+        <h2>Mezquite</h2>
+        <p>Tolerante a sequía extrema. Vive en climas áridos. Suelo pobre y bien drenado. Fija nitrógeno, excelente para reforestación.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function mostrarPlanta() {
+      const plantas = document.querySelectorAll('.info-planta');
+      plantas.forEach(p => p.style.display = 'none');
+      const seleccion = document.getElementById('plantaSelect').value;
+      if (seleccion) {
+        document.getElementById(seleccion).style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
