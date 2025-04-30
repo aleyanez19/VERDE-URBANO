@@ -104,7 +104,8 @@
 
     /* Hero Animation Section */
     .hero-animation {
-      height: 400px;
+      height: 100vh;
+      width: 100%;
       position: relative;
       overflow: hidden;
       margin-top: 120px;
@@ -127,11 +128,11 @@
     .sun-layer {
       z-index: 2;
       position: absolute;
-      width: 300px;
-      height: 200px;
+      width: 600px;
+      height: 400px;
       top: 50px;
       left: -150px;
-      animation: sunMovement 50s infinite linear;
+      animation: sunMovement 40s infinite linear;
       /* Se reemplazará por tu imagen del sol */
     }
 
@@ -509,12 +510,13 @@
       <p class="lead-text">
         El Parque Cárcamo, restaurado por el municipio, está lleno de vida: árboles que podrían florecer aún más con un sistema de riego eficiente. Hoy, muchas zonas presentan fugas, deshidratación y un desperdicio silencioso. Es momento de actuar por el verde de nuestra ciudad.
       </p>
+
       <section class="hero-animation">
         <div class="animation-layer bg-layer" style="background-image: url('imagess/fondo.png');"></div>
         <img src="imagess/sol.png" alt="Sol" class="sun-layer">
         <div class="animation-layer city-layer" style="background-image: url('imagess/hmo.png');"></div>
       </section>
-      
+
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-number">66.7%</div>
@@ -584,81 +586,396 @@
     </div>
   </section>
 
-  <!-- Contacto -->
-  <section id="contact" class="bg-light">
+  <!-- Sección de Contacto Mejorada -->
+<section id="contacto" class="content-section light-section">
     <div class="container">
-      <h2 class="section-title text-center mb-5" data-i18n="Contáctanos">Contáctanos</h2>
-      <div class="row justify-content-between">
-        <div class="col-lg-6 mb-5 mb-lg-0 animate-on-scroll">
-          <form class="contact-form">
-            <div class="row">
-              <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Tu nombre" data-i18n="Tu nombre" required />
-              </div>
-              <div class="col-md-6">
-                <input type="email" class="form-control" placeholder="Correo electrónico" data-i18n="Correo electrónico" required />
-              </div>
+      <h2 class="section-title">Contáctanos</h2>
+      <p class="lead-text">
+        ¿Tienes alguna pregunta o comentario sobre nuestro proyecto de riego profundo? Nos encantaría escucharte. Completa el formulario y nos pondremos en contacto contigo a la brevedad.
+      </p>
+      
+      <div class="contact-container">
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
             </div>
-            <input type="text" class="form-control" placeholder="Asunto" data-i18n="Asunto" />
-            <textarea rows="5" class="form-control" placeholder="Escribe tu mensaje..." data-i18n="Escribe tu mensaje..." required></textarea>
-            <button type="submit" class="btn btn-submit" data-i18n="Enviar Mensaje">Enviar Mensaje</button>
-          </form>
-        </div>
-        <div class="col-lg-5 animate-on-scroll">
-          <h4 class="mb-4" data-i18n="Información de Contacto">Información de Contacto</h4>
-          <div class="mb-4">
-            <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="Hermosillo, Sonora, México">Hermosillo, Sonora, México</span></p>
-            <p><i class="fas fa-phone"></i> <span data-i18n="+52 662 123 4567">+52 662 123 4567</span></p>
-            <p><i class="fas fa-envelope"></i> <span data-i18n="contacto@bluebasin.ai">contacto@bluebasin.ai</span></p>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+            </div>
           </div>
-          <div class="map-container">
-            <iframe src="https://maps.google.com/maps?q=Hermosillo%20Sonora&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" allowfullscreen=""></iframe>
+          
+          <div class="form-group">
+            <label for="asunto">Asunto</label>
+            <input type="text" id="asunto" name="asunto" placeholder="Motivo de contacto">
+          </div>
+          
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+        
+        <div class="contact-info">
+          <h3>Información de contacto</h3>
+          <ul class="contact-list">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Hermosillo, Sonora, México</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>+52 662 123 4567</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>contacto@bluebasin.ai</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>Lunes - Viernes: 9:00 - 18:00</span>
+            </li>
+          </ul>
+          
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
+  
+  <!-- Footer Mejorado -->
   <footer class="footer">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-5 mb-lg-0">
-          <h5 data-i18n="Contacto">Contacto</h5>
-          <ul class="list-unstyled">
-            <li data-i18n="Email">Email</li>
-            <li data-i18n="Telefono">Teléfono</li>
-            <li data-i18n="Direccion">Dirección</li>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="imagess/verdeu.png" alt="Logo DRI Hermosillo Verde" width="60" height="60">
+            <span>Hermosillo Verde</span>
+          </div>
+          <p class="footer-about">
+            Transformando la manera en que cuidamos nuestros espacios verdes con tecnología innovadora de riego profundo.
+          </p>
+        </div>
+        
+        <div class="footer-links">
+          <h5>Enlaces rápidos</h5>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="propuesta.html">Propuesta</a></li>
+            <li><a href="comofunciona.html">¿Cómo funciona?</a></li>
+            <li><a href="riego.html">Riego</a></li>
+            <li><a href="plantas-nativas.html">Plantas Nativas</a></li>
           </ul>
         </div>
-        <div class="col-md-4 mb-5 mb-lg-0">
-          <h5 data-i18n="Enlaces">Enlaces</h5>
-          <ul class="footer-links list-unstyled">
-            <li><a href="index.html" data-i18n="Inicio">Inicio</a></li>
-            <li><a href="propuesta.html" data-i18n="Propuesta">Propuesta</a></li>
-            <li><a href="comofunciona.html" data-i18n="¿Como funcionamos">¿Cómo funciona?</a></li>
-            <li><a href="riego.html" data-i18n="Riego">Riego</a></li>
+        
+        <div class="footer-contact">
+          <h5>Contáctanos</h5>
+          <ul>
+            <li><i class="fas fa-envelope"></i> contacto@bluebasin.ai</li>
+            <li><i class="fas fa-phone"></i> +52 662 123 4567</li>
+            <li><i class="fas fa-map-marker-alt"></i> Hermosillo, Sonora, México</li>
           </ul>
-        </div>
-        <div class="col-md-4">
-          <h5 data-i18n="Horario">Horario</h5>
-          <ul class="list-unstyled">
-            <li data-i18n="Lunes-Viernes: 9:00 - 18:00">Lunes-Viernes: 9:00 - 18:00</li>
-          </ul>
-          <div class="social-links mt-3">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+          
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
       </div>
-      <div class="text-center mt-3">
-        <small data-i18n="Todos los derechos reservados.">Todos los derechos reservados.</small>
+      
+      <div class="copyright">
+        <p>&copy; 2025 Hermosillo Verde. Todos los derechos reservados.</p>
       </div>
     </div>
   </footer>
-
-
+  
+  <!-- Estilos adicionales para contacto y footer -->
+  <style>
+    /* Estilos para la sección de contacto */
+    .contact-container {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .contact-form {
+      flex: 1;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .form-group {
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--color-dark);
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(0,143,84,0.1);
+    }
+    
+    .contact-info {
+      flex: 0 0 300px;
+      background-color: var(--color-primary);
+      padding: 30px;
+      color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .contact-info h3 {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .contact-info h3:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: var(--color-accent);
+      bottom: 0;
+      left: 0;
+      border-radius: 2px;
+    }
+    
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+    }
+    
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .contact-list i {
+      margin-right: 15px;
+      font-size: 1.1rem;
+      color: var(--color-accent);
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+    }
+    
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s;
+    }
+    
+    .social-icons a:hover {
+      background-color: var(--color-accent);
+      transform: translateY(-3px);
+    }
+    
+    /* Estilos mejorados para el footer */
+    .footer {
+      background-color: var(--color-secondary);
+      color: white;
+      padding: 60px 0 20px;
+    }
+    
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-brand {
+      flex: 1 0 300px;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .footer-logo img {
+      border-radius: 50%;
+      background-color: white;
+      padding: 5px;
+    }
+    
+    .footer-logo span {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    .footer-about {
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+    
+    .footer-links, .footer-contact {
+      flex: 1;
+    }
+    
+    .footer h5 {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .footer h5:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: var(--color-accent);
+      bottom: 0;
+      left: 0;
+      border-radius: 2px;
+    }
+    
+    .footer ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .footer-links a:hover {
+      color: var(--color-accent);
+      padding-left: 5px;
+    }
+    
+    .footer-contact ul li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .footer-contact i {
+      margin-right: 15px;
+      color: var(--color-accent);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      color: white;
+      transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+      background-color: var(--color-accent);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Media Queries para responsive */
+    @media (max-width: 992px) {
+      .contact-container {
+        flex-direction: column;
+      }
+      
+      .contact-info {
+        flex: 1;
+      }
+      
+      .footer-content {
+        gap: 30px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+      
+      .footer-brand, .footer-links, .footer-contact {
+        flex: 1 0 100%;
+      }
+    }
+  </style>
   <script>
     // Menú móvil
     document.addEventListener("DOMContentLoaded", () => {
