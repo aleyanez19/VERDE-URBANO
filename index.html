@@ -58,13 +58,13 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 30px;
     }
 
     .logo-text {
-      font-weight: 600;
+      font-weight: 400;
       color: var(--color-primary);
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .nav-pill {
@@ -127,11 +127,11 @@
     .sun-layer {
       z-index: 2;
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 300px;
+      height: 200px;
       top: 50px;
       left: -150px;
-      animation: sunMovement 20s infinite linear;
+      animation: sunMovement 50s infinite linear;
       /* Se reemplazará por tu imagen del sol */
     }
 
@@ -335,7 +335,7 @@
     
     .btn-submit {
       background: var(--secondary-color);
-      color: white;
+      color: rgb(245, 184, 44);
       border: none;
       padding: 12px 30px;
       border-radius: 30px;
@@ -354,7 +354,7 @@
     /* Footer */
     .footer {
       background-color: var(--primary-color);
-      color: white;
+      color: rgb(255, 119, 0);
       padding: 80px 0 30px;
     }
     
@@ -399,7 +399,7 @@
     }
     
     .footer-links a {
-      color: #ddd;
+      color: #bdbdbd;
       transition: all 0.3s ease;
       text-decoration: none;
       font-size: 1.05rem;
@@ -486,8 +486,8 @@
     <div class="container">
       <div class="header-container">
         <div class="logo">
-          <img src="/api/placeholder/40/40" alt="Logo DRI" style="border-radius: 50%;">
-          <span class="logo-text">DRI Hermosillo Verde</span>
+          <img src="imagess/verdeu.png" alt="Logo DRI" style="border-radius: 50%;">
+          <span class="logo-text">Hermosillo Verde. Verde Urbano</span>
         </div>
         <nav class="nav-menu" id="navMenu">
           <a href="index.html">Inicio</a>
@@ -503,19 +503,18 @@
     </div>
   </header>
 
-  <section class="hero-animation">
-    <div class="animation-layer bg-layer" style="background-image: url('imagess/fondo.png');"></div>
-    <img src="imagess/sol.png" alt="Sol" class="sun-layer">
-    <div class="animation-layer city-layer" style="background-image: url('imagess/hmo.png');"></div>
-  </section>
-
   <section class="hero-content">
     <div class="container">
       <h1 class="section-title">Oxigenemos Hermosillo</h1>
       <p class="lead-text">
         El Parque Cárcamo, restaurado por el municipio, está lleno de vida: árboles que podrían florecer aún más con un sistema de riego eficiente. Hoy, muchas zonas presentan fugas, deshidratación y un desperdicio silencioso. Es momento de actuar por el verde de nuestra ciudad.
       </p>
-
+      <section class="hero-animation">
+        <div class="animation-layer bg-layer" style="background-image: url('imagess/fondo.png');"></div>
+        <img src="imagess/sol.png" alt="Sol" class="sun-layer">
+        <div class="animation-layer city-layer" style="background-image: url('imagess/hmo.png');"></div>
+      </section>
+      
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-number">66.7%</div>
