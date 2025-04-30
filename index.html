@@ -4,58 +4,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DRI Hermosillo Verde</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a2d9a66aa2.js" crossorigin="anonymous"></script>
   <style>
     * {
-      margin: 0; padding: 0;
+      margin: 0; 
+      padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    :root {
+      --color-primary: #008F54;
+      --color-secondary: #006A58;
+      --color-accent: #F2A71B;
+      --color-light: #F6F6F6;
+      --color-dark: #333333;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background-color: #f9f9f9;
-      color: #333;
+      background-color: var(--color-light);
+      color: var(--color-dark);
       line-height: 1.6;
+      font-weight: 300;
     }
 
     header {
-      background-color: #fff;
-      border-bottom: 1px solid #ddd;
-      padding: 1rem 2rem;
+      background-color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .header-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      height: 80px;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 15px;
+    }
+
+    .logo-text {
       font-weight: 600;
+      color: var(--color-primary);
       font-size: 1.2rem;
     }
 
-    .logo img {
-      width: 40px;
-      height: 40px;
-    }
-
-    .nav-pill {
+    .nav-menu {
       display: flex;
-      gap: 1rem;
+      gap: 25px;
     }
 
-    .nav-pill a {
+    .nav-menu a {
       text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      padding: 0.5rem;
+      color: var(--color-dark);
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
     }
 
-    .nav-pill a:hover {
-      color: #0057a4;
+    .nav-menu a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--color-primary);
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover:after {
+      width: 100%;
     }
 
     .mobile-menu-btn {
@@ -63,282 +102,465 @@
       background: none;
       border: none;
       font-size: 1.5rem;
+      color: var(--color-primary);
+      cursor: pointer;
     }
 
-    .hero {
-      padding: 4rem 2rem;
-      background-color: #fff;
+    /* Hero Animation Section */
+    .hero-animation {
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      margin-top: 120px;
+      margin-bottom: 40px;
+    }
+
+    .animation-layer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .bg-layer {
+      z-index: 1;
+      /* Se reemplazará por tu imagen de fondo */
+    }
+
+    .sun-layer {
+      z-index: 2;
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      top: 50px;
+      left: -150px;
+      animation: sunMovement 20s infinite linear;
+      /* Se reemplazará por tu imagen del sol */
+    }
+
+    .city-layer {
+      z-index: 3;
+      /* Se reemplazará por tu imagen de la ciudad */
+    }
+
+    @keyframes sunMovement {
+      0% { transform: translateX(0); left: -150px; }
+      50% { transform: translateX(calc(100vw + 150px)); left: 0; }
+      100% { transform: translateX(0); left: -150px; }
+    }
+
+    /* Main Content */
+    .hero-content {
       text-align: center;
+      padding: 60px 20px;
+      background-color: white;
     }
 
-    .hero h1 {
+    .section-title {
       font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #0057a4;
-    }
-
-    .hero p {
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: #444;
-    }
-
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-stat {
-      text-align: center;
-    }
-
-    .hero-stat-number {
-      font-size: 1.8rem;
       font-weight: 600;
-      color: #0057a4;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 15px;
     }
 
-    .hero-buttons {
+    .section-title:after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background-color: var(--color-accent);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .lead-text {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    .stat-card {
+      background-color: white;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+      padding: 30px 20px;
+      text-align: center;
+      border-radius: 4px;
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Botones */
+    .btn-container {
       display: flex;
-      gap: 1rem;
+      gap: 15px;
       justify-content: center;
-      flex-wrap: wrap;
+      margin-bottom: 40px;
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      background-color: #0057a4;
-      color: #fff;
+      display: inline-block;
+      padding: 12px 30px;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .btn-outline {
       background-color: transparent;
-      border: 1px solid #0057a4;
-      color: #0057a4;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
     }
 
-    section {
-      padding: 3rem 2rem;
-      background-color: #f9f9f9;
+    .btn-outline:hover {
+      background-color: var(--color-primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    .section-title h2 {
-      font-size: 1.5rem;
-      color: #0057a4;
-      margin-bottom: 1rem;
-      text-align: center;
+    /* Table Section */
+    .content-section {
+      padding: 60px 20px;
     }
 
-    .matriz {
-      background-color: #fff;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    .white-section {
+      background-color: white;
+    }
+
+    .light-section {
+      background-color: var(--color-light);
+    }
+
+    .table-container {
       max-width: 900px;
-      margin: auto;
-    }
-
-    .matriz h3 {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-      color: #333;
+      margin: 0 auto;
+      overflow-x: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 8px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 1rem;
-    }
-
-    th, td {
-      border-bottom: 1px solid #ddd;
-      padding: 0.75rem;
-      text-align: left;
+      background-color: white;
     }
 
     th {
-      background-color: #f0f0f0;
+      background-color: var(--color-primary);
+      color: white;
+      font-weight: 600;
+      text-align: left;
+      padding: 15px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      color: #555;
+    }
+
+    tr:hover td {
+      background-color: rgba(0,143,84,0.05);
+    }
+
+    .highlight {
+      color: var(--color-primary);
+      font-weight: 600;
     }
 
     footer {
-      background-color: #f4f4f4;
-      padding: 2rem;
-      margin-top: 2rem;
-    }
-
-    footer h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    footer table {
-      width: 100%;
-      font-size: 0.95rem;
-    }
-
-    footer td, footer th {
-      padding: 0.5rem;
-      border-bottom: 1px solid #ccc;
-    }
-
-    footer p {
-      margin-top: 1rem;
+      background-color: var(--color-secondary);
+      color: white;
+      padding: 40px 20px;
       text-align: center;
-      font-size: 0.9rem;
-      color: #666;
     }
 
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Media Queries */
     @media (max-width: 768px) {
-      .nav-pill {
+      .header-container {
+        height: 70px;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
         flex-direction: column;
-        display: none;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        padding: 20px 0;
+      }
+
+      .nav-menu.active {
+        right: 0;
       }
 
       .mobile-menu-btn {
         display: block;
       }
 
-      .hero-stats {
-        flex-direction: column;
+      .stats-grid {
+        grid-template-columns: 1fr;
       }
 
-      .hero-buttons {
+      .btn-container {
         flex-direction: column;
         align-items: center;
+      }
+
+      .hero-animation {
+        height: 250px;
+        margin-top: 90px;
       }
     }
   </style>
 </head>
-<body>
 
-<header>
-    <body class="bg-white text-gray-800 font-sans">
-        <header class="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-          <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-            <div class="flex items-center gap-3">
-              <img src="/api/placeholder/40/40" alt="Logo DRI" class="w-10 h-10 rounded-full">
-              <span class="text-lg font-semibold text-green-700">DRI Hermosillo Verde</span>
-            </div>
-            <nav class="hidden md:flex gap-6 text-sm font-medium text-gray-600">
-              <a href="index.html" class="hover:text-green-600">Inicio</a>
-              <a href="propuesta.html" class="hover:text-green-600">Propuesta</a>
-              <a href="comofunciona.html" class="hover:text-green-600">¿Cómo funciona?</a>
-              <a href="riego.html" class="hover:text-green-600">Riego</a>
-              <a href="plantas-nativas.html" class="hover:text-green-600">Plantas Nativas</a>
-            </nav>
-            <button class="md:hidden text-green-700 text-xl" id="mobileMenuBtn">
-              <i class="fas fa-bars"></i>
-            </button>
-          </div>
-        </header>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-container">
+        <div class="logo">
+          <img src="/api/placeholder/40/40" alt="Logo DRI" style="border-radius: 50%;">
+          <span class="logo-text">DRI Hermosillo Verde</span>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html">Inicio</a>
+          <a href="propuesta.html">Propuesta</a>
+          <a href="comofunciona.html">¿Cómo funciona?</a>
+          <a href="riego.html">Riego</a>
+          <a href="plantas-nativas.html">Plantas Nativas</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-animation">
+    <div class="animation-layer bg-layer" style="background-image: url('imagess/fondo.png');"></div>
+    <div class="sun-layer" style="background-image: url('imagess/sol.png');"></div>
+    <div class="animation-layer city-layer" style="background-image: url('imagess/hmo.png');"></div>
+  </section>
+
+  <section class="hero-content">
+    <div class="container">
+      <h1 class="section-title">Oxigenemos Hermosillo</h1>
+      <p class="lead-text">
+        El Parque Cárcamo, restaurado por el municipio, está lleno de vida: árboles que podrían florecer aún más con un sistema de riego eficiente. Hoy, muchas zonas presentan fugas, deshidratación y un desperdicio silencioso. Es momento de actuar por el verde de nuestra ciudad.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">66.7%</div>
+          <div class="stat-label">Menos agua</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">24"</div>
+          <div class="stat-label">Profundidad</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3x</div>
+          <div class="stat-label">Más eficiente</div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <a href="propuesta.html" class="btn btn-primary">Ver la propuesta</a>
+        <a href="#contacto" class="btn btn-outline">Contactar</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologia" class="content-section white-section">
+    <div class="container">
+      <h2 class="section-title">Tecnología de Riego Profundo</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspecto</th>
+              <th>Riego por goteo</th>
+              <th>Riego profundo (DRI)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Agua utilizada</td>
+              <td>18 galones</td>
+              <td>6 galones</td>
+            </tr>
+            <tr>
+              <td>Profundidad (72hrs)</td>
+              <td>9"</td>
+              <td>24"</td>
+            </tr>
+            <tr>
+              <td>Duración de humedad</td>
+              <td>Baja</td>
+              <td>Alta</td>
+            </tr>
+            <tr>
+              <td>Ahorro</td>
+              <td>-</td>
+              <td class="highlight">66.7%</td>
+            </tr>
+            <tr>
+              <td>Oxigenación del suelo</td>
+              <td>Pobre</td>
+              <td>Alta</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: #666;">
+        Fuente: <a href="https://www.hermosillo.gob.mx/parque-metropolitano/" target="_blank" style="color: var(--color-primary);">Parque Metropolitano</a> y pruebas de DRI Technology.
+      </p>
+    </div>
+  </section>
+
+  <section id="contacto" class="content-section light-section">
+    <div class="container">
+      <h2 class="section-title">Contacto</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Celular</th>
+              <th>Correo electrónico</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ana Martínez</td>
+              <td>+52 55 1234 5678</td>
+              <td>ana.martinez@email.com</td>
+            </tr>
+            <tr>
+              <td>Juan López</td>
+              <td>+52 33 8765 4321</td>
+              <td>juan.lopez@email.com</td>
+            </tr>
+            <tr>
+              <td>María García</td>
+              <td>+52 81 2345 6789</td>
+              <td>maria.garcia@email.com</td>
+            </tr>
+            <tr>
+              <td>Carlos Pérez</td>
+              <td>+52 444 987 6543</td>
+              <td>carlos.perez@email.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Iniciativa ciudadana por un Hermosillo más verde · En colaboración con el <a href="https://www.hermosillo.gob.mx/" target="_blank">Ayuntamiento de Hermosillo</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Menú móvil
+    document.addEventListener("DOMContentLoaded", () => {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const navMenu = document.getElementById('navMenu');
       
-        <main class="pt-28">
-            <section class="hero relative bg-cover bg-center text-white py-24 px-6 text-center fade-in" style="background-image: url('imagess/hermosillofire.jpg');">
-                <div class="absolute inset-0 bg-black bg-opacity-40"></div> <!-- filtro oscuro -->
-                <div class="relative z-10 max-w-4xl mx-auto">
-                  <h1 class="text-4xl font-bold mb-4">Oxigenemos Hermosillo</h1>
-                  <p class="text-lg leading-relaxed mb-6">
-                    El Parque Cárcamo, restaurado por el municipio, está lleno de vida: árboles que podrían florecer aún más con un sistema de riego eficiente. Hoy, muchas zonas presentan fugas, deshidratación y un desperdicio silencioso. Es momento de actuar por el verde de nuestra ciudad.
-                  </p>
-                </div>
-              </section>
-              
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+          mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+        });
+      }
       
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 my-10">
-                <div class="bg-white shadow rounded-xl p-4">
-                  <p class="text-3xl font-bold text-green-700">66.7%</p>
-                  <p class="text-sm text-gray-600">Menos agua</p>
-                </div>
-                <div class="bg-white shadow rounded-xl p-4">
-                  <p class="text-3xl font-bold text-green-700">24"</p>
-                  <p class="text-sm text-gray-600">Profundidad</p>
-                </div>
-                <div class="bg-white shadow rounded-xl p-4">
-                  <p class="text-3xl font-bold text-green-700">3x</p>
-                  <p class="text-sm text-gray-600">Más eficiente</p>
-                </div>
-              </div>
+      // Animación para elementos cuando entran en viewport
+      const observerOptions = {
+        threshold: 0.1
+      };
       
-              <div class="flex justify-center gap-4">
-                <a href="propuesta.html" class="bg-green-700 text-white px-6 py-3 rounded-full hover:bg-green-800 transition">Ver la propuesta</a>
-                <a href="#contacto" class="border border-green-700 text-green-700 px-6 py-3 rounded-full hover:bg-green-100 transition">Contactar</a>
-              </div>
-            </div>
-          </section>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
       
-          <section id="tecnologia" class="py-16 px-6 bg-white fade-in">
-            <div class="max-w-5xl mx-auto text-center">
-              <h2 class="text-3xl font-semibold text-green-800 mb-10">Tecnología de Riego Profundo</h2>
-      
-              <div class="overflow-x-auto">
-                <table class="w-full table-auto border-collapse shadow-md rounded-lg overflow-hidden">
-                  <thead class="bg-green-200 text-green-800">
-                    <tr>
-                      <th class="px-4 py-3 text-left">Aspecto</th>
-                      <th class="px-4 py-3">Riego por goteo</th>
-                      <th class="px-4 py-3">Riego profundo (DRI)</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-gray-700">
-                    <tr><td class="p-3">Agua utilizada</td><td class="text-center">18 galones</td><td class="text-center">6 galones</td></tr>
-                    <tr class="bg-gray-50"><td class="p-3">Profundidad (72hrs)</td><td class="text-center">9"</td><td class="text-center">24"</td></tr>
-                    <tr><td class="p-3">Duración de humedad</td><td class="text-center">Baja</td><td class="text-center">Alta</td></tr>
-                    <tr class="bg-gray-50"><td class="p-3">Ahorro</td><td class="text-center">-</td><td class="text-center text-green-600 font-bold">66.7%</td></tr>
-                    <tr><td class="p-3">Oxigenación del suelo</td><td class="text-center">Pobre</td><td class="text-center">Alta</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="text-sm text-gray-500 mt-4">
-                Fuente: <a href="https://www.hermosillo.gob.mx/parque-metropolitano/" target="_blank" class="underline text-green-700">Parque Metropolitano</a> y pruebas de DRI Technology.
-              </p>
-            </div>
-          </section>
-      
-          <section id="contacto" class="py-16 px-6 bg-green-50 fade-in">
-            <div class="max-w-5xl mx-auto text-center">
-              <h3 class="text-2xl font-bold text-green-800 mb-6">Contacto</h3>
-              <div class="overflow-x-auto">
-                <table class="w-full table-auto border-collapse text-left">
-                  <thead class="bg-green-100 text-green-700">
-                    <tr>
-                      <th class="px-4 py-3">Nombre</th>
-                      <th class="px-4 py-3">Celular</th>
-                      <th class="px-4 py-3">Correo electrónico</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-gray-700">
-                    <tr><td class="px-4 py-2">Ana Martínez</td><td>+52 55 1234 5678</td><td>ana.martinez@email.com</td></tr>
-                    <tr><td class="px-4 py-2">Juan López</td><td>+52 33 8765 4321</td><td>juan.lopez@email.com</td></tr>
-                    <tr><td class="px-4 py-2">María García</td><td>+52 81 2345 6789</td><td>maria.garcia@email.com</td></tr>
-                    <tr><td class="px-4 py-2">Carlos Pérez</td><td>+52 444 987 6543</td><td>carlos.perez@email.com</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-        </main>
-      
-        <footer class="bg-white py-6 border-t text-center text-sm text-gray-500 fade-in">
-          Iniciativa ciudadana por un Hermosillo más verde · En colaboración con el
-          <a href="https://www.hermosillo.gob.mx/" target="_blank" class="underline text-green-600">Ayuntamiento de Hermosillo</a>
-        </footer>
-      
-        <!-- Animación de fade-in -->
-        <script>
-          document.addEventListener("DOMContentLoaded", () => {
-            const fadeIns = document.querySelectorAll(".fade-in");
-            fadeIns.forEach((el, i) => {
-              el.style.opacity = 0;
-              el.style.transition = "opacity 1.5s ease-out";
-              setTimeout(() => el.style.opacity = 1, 300 * i);
-            });
-          });
-        </script>
-      </body>
-      
+      document.querySelectorAll('.content-section, .hero-content').forEach(section => {
+        section.style.opacity = 0;
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
