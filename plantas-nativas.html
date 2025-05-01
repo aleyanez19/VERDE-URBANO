@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plantas Nativas Perennes</title>
+  <title>Plantas Nativas de Sonora</title>
   <style>
     :root {
       --color-fondo: #fff8f0;
-      --color-primario: #f97316;
-      --color-secundario: #fdba74;
+      --color-primario: #7c6c2b;
+      --color-secundario: #aaa073;
+      --color-terciario: #d1c9a6;
       --color-texto: #4b2e19;
+      --color-claro: #f5f1e5;
     }
 
     body {
@@ -24,6 +26,28 @@
       color: white;
       padding: 2rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("/api/placeholder/800/200");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+      z-index: 0;
+    }
+
+    header h1, header p {
+      position: relative;
+      z-index: 1;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     nav {
@@ -31,6 +55,10 @@
       display: flex;
       justify-content: center;
       padding: 0.5rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     nav ul {
@@ -49,24 +77,13 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s;
     }
 
-    nav li ul {
-      display: none;
-      position: absolute;
+    nav a:hover {
       background-color: var(--color-secundario);
-      top: 100%;
-      left: 0;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-    }
-
-    nav li:hover ul {
-      display: block;
-    }
-
-    nav li ul li {
-      margin: 0.5rem 0;
     }
 
     main {
@@ -76,112 +93,768 @@
       align-items: center;
     }
 
-    .selector {
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
       margin-bottom: 2rem;
-      text-align: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
     }
 
-    select {
-      padding: 0.5rem;
+    .filtro {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filtro label {
+      font-weight: bold;
+    }
+
+    select, button {
+      padding: 0.5rem 1rem;
       font-size: 1rem;
       border-radius: 0.5rem;
-      border: 1px solid #ccc;
+      border: 1px solid var(--color-secundario);
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.3s;
     }
 
-    .info-planta {
+    select:hover, button:hover {
+      border-color: var(--color-primario);
+    }
+
+    button {
+      background-color: var(--color-secundario);
+      color: white;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: var(--color-primario);
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .planta-card {
       background: white;
       border-radius: 15px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       overflow: hidden;
-      width: 100%;
-      max-width: 600px;
-      display: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
     }
 
-    .info-planta img {
+    .planta-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .planta-card img {
       width: 100%;
-      height: 300px;
+      height: 200px;
       object-fit: cover;
     }
 
-    .info-planta .contenido {
+    .planta-card .card-content {
       padding: 1rem;
     }
 
-    .info-planta h2 {
+    .planta-card h3 {
       margin-top: 0;
+      color: var(--color-primario);
+    }
+
+    .planta-card .etiquetas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .etiqueta {
+      background-color: var(--color-terciario);
+      color: var(--color-texto);
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .modal-contenido {
+      background-color: white;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 90%;
+      margin: 5% auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cerrar-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      height: 250px;
+      position: relative;
+    }
+
+    .modal-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-header .titulo-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      padding: 1rem;
+      color: white;
+    }
+
+    .datos-principales {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: var(--color-claro);
+      padding: 1rem;
+    }
+
+    .dato {
+      flex: 1;
+      min-width: 150px;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .dato span {
+      display: block;
+      font-weight: bold;
+      color: var(--color-primario);
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    .seccion {
+      margin-bottom: 2rem;
+    }
+
+    .seccion h3 {
+      color: var(--color-primario);
+      border-bottom: 2px solid var(--color-terciario);
+      padding-bottom: 0.5rem;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid var(--color-terciario);
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+
+    .tab.activo {
+      font-weight: bold;
+      color: var(--color-primario);
+      border-bottom-color: var(--color-primario);
+    }
+
+    .tab-contenido {
+      display: none;
+    }
+
+    .tab-contenido.activo {
+      display: block;
+    }
+
+    .galeria-fotos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .galeria-item {
+      height: 100px;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .galeria-item:hover img {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .filtros {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .modal-contenido {
+        width: 95%;
+        margin: 10% auto;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Plantas Nativas Perennes</h1>
-    <p>Selecciona una especie para ver sus características ecológicas</p>
+    <h1>Plantas Nativas de Sonora</h1>
+    <p>Descubre la biodiversidad del desierto sonorense</p>
   </header>
 
+  <nav>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre">Sobre el proyecto</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
   <main>
-    <div class="selector">
-      <label for="plantaSelect">Elige una planta:</label>
-      <select id="plantaSelect" onchange="mostrarPlanta()">
-        <option value="">-- Selecciona --</option>
-        <option value="lavanda">Lavanda</option>
-        <option value="salvia">Salvia</option>
-        <option value="equinacea">Equinácea</option>
-        <option value="anacahuita">Anacahuita</option>
-        <option value="mezquite">Mezquite</option>
-      </select>
+    <div class="filtros">
+      <div class="filtro">
+        <label for="tipoPlanta">Tipo de planta:</label>
+        <select id="tipoPlanta">
+          <option value="todas">Todas</option>
+          <option value="arboles">Árboles</option>
+          <option value="arbustos">Arbustos</option>
+          <option value="cactaceas">Cactáceas</option>
+          <option value="hierbas">Hierbas</option>
+        </select>
+      </div>
+      
+      <div class="filtro">
+        <label for="clima">Clima:</label>
+        <select id="clima">
+          <option value="todos">Todos</option>
+          <option value="arido">Árido</option>
+          <option value="semi-arido">Semi-árido</option>
+          <option value="templado">Templado</option>
+        </select>
+      </div>
+      
+      <div class="filtro">
+        <label for="uso">Uso:</label>
+        <select id="uso">
+          <option value="todos">Todos</option>
+          <option value="ornamental">Ornamental</option>
+          <option value="medicinal">Medicinal</option>
+          <option value="comestible">Comestible</option>
+          <option value="ritual">Ceremonial/Ritual</option>
+        </select>
+      </div>
+      
+      <button id="aplicarFiltros">Aplicar filtros</button>
+      <button id="resetFiltros">Restablecer</button>
     </div>
 
-    <div id="lavanda" class="info-planta">
-      <img src="https://images.unsplash.com/photo-1592861959345-704adad6df2a" alt="Lavanda">
-      <div class="contenido">
-        <h2>Lavanda</h2>
-        <p>Temperatura ideal: 15–30 °C. Suelo bien drenado. Necesita exposición solar directa. Muy resistente a la sequía.</p>
-      </div>
-    </div>
-
-    <div id="salvia" class="info-planta">
-      <img src="https://images.unsplash.com/photo-1635687152636-f24382aa743e" alt="Salvia">
-      <div class="contenido">
-        <h2>Salvia</h2>
-        <p>Climas templados a cálidos. Suelo arenoso, seco. Tolera sequías. Muy útil para polinizadores.</p>
-      </div>
-    </div>
-
-    <div id="equinacea" class="info-planta">
-      <img src="https://images.unsplash.com/photo-1622119486534-804d44a0e06f" alt="Equinácea">
-      <div class="contenido">
-        <h2>Equinácea</h2>
-        <p>Prefiere temperaturas entre 18 y 28 °C. Tolera heladas leves. Necesita suelo fértil y sol directo.</p>
-      </div>
-    </div>
-
-    <div id="anacahuita" class="info-planta">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Cordia_boissieri.jpg" alt="Anacahuita">
-      <div class="contenido">
-        <h2>Anacahuita</h2>
-        <p>Soporta hasta 40 °C, prefiere climas secos. Suelo arenoso o calizo. Muy ornamental y útil para fauna local.</p>
-      </div>
-    </div>
-
-    <div id="mezquite" class="info-planta">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Prosopis_laevigata_1.jpg" alt="Mezquite">
-      <div class="contenido">
-        <h2>Mezquite</h2>
-        <p>Tolerante a sequía extrema. Vive en climas áridos. Suelo pobre y bien drenado. Fija nitrógeno, excelente para reforestación.</p>
-      </div>
+    <div class="galeria" id="galeria">
+      <!-- Las tarjetas de plantas se insertarán dinámicamente con JavaScript -->
     </div>
   </main>
 
+  <div id="plantaModal" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar-modal">&times;</span>
+      <div class="modal-header">
+        <img id="modalImagen" src="" alt="">
+        <div class="titulo-overlay">
+          <h2 id="modalTitulo"></h2>
+          <p id="modalNombreCientifico"></p>
+        </div>
+      </div>
+      
+      <div class="datos-principales">
+        <div class="dato">
+          <span>Tipo</span>
+          <div id="modalTipo"></div>
+        </div>
+        <div class="dato">
+          <span>Clima</span>
+          <div id="modalClima"></div>
+        </div>
+        <div class="dato">
+          <span>Altura</span>
+          <div id="modalAltura"></div>
+        </div>
+        <div class="dato">
+          <span>Riego</span>
+          <div id="modalRiego"></div>
+        </div>
+      </div>
+      
+      <div class="modal-body">
+        <div class="tabs">
+          <div class="tab activo" data-tab="descripcion">Descripción</div>
+          <div class="tab" data-tab="habitat">Hábitat</div>
+          <div class="tab" data-tab="usos">Usos tradicionales</div>
+          <div class="tab" data-tab="cultivo">Cultivo</div>
+          <div class="tab" data-tab="galeria">Galería</div>
+        </div>
+        
+        <div id="descripcion" class="tab-contenido activo">
+          <p id="modalDescripcion"></p>
+        </div>
+        
+        <div id="habitat" class="tab-contenido">
+          <p id="modalHabitat"></p>
+        </div>
+        
+        <div id="usos" class="tab-contenido">
+          <p id="modalUsos"></p>
+        </div>
+        
+        <div id="cultivo" class="tab-contenido">
+          <p id="modalCultivo"></p>
+        </div>
+        
+        <div id="galeria" class="tab-contenido">
+          <div class="galeria-fotos" id="modalGaleria">
+            <!-- Las imágenes de la galería se insertarán dinámicamente -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    function mostrarPlanta() {
-      const plantas = document.querySelectorAll('.info-planta');
-      plantas.forEach(p => p.style.display = 'none');
-      const seleccion = document.getElementById('plantaSelect').value;
-      if (seleccion) {
-        document.getElementById(seleccion).style.display = 'block';
+    // Base de datos de plantas nativas de Sonora
+    const plantasNativas = [
+      {
+        id: 1,
+        nombre: "Palo Verde",
+        nombreCientifico: "Parkinsonia aculeata",
+        tipo: "arboles",
+        clima: "arido",
+        usos: ["ornamental", "medicinal"],
+        altura: "4-10 m",
+        riego: "Muy bajo",
+        imagen: "imagess/paloverde.jpg",
+        descripcion: "El Palo Verde es un árbol emblemático del desierto de Sonora, reconocible por su corteza y ramas de color verde que realizan fotosíntesis. Esta adaptación le permite sobrevivir en condiciones de extrema sequía.",
+        habitat: "Crece en planicies desérticas, arroyos secos y laderas rocosas. Es común encontrarlo en elevaciones bajas a medias en todo el estado de Sonora, especialmente en la región central y costera.",
+        usosTrad: "Las flores y semillas tiernas son comestibles. Se utiliza en medicina tradicional para tratar fiebres y problemas digestivos. Su madera es útil para leña y artesanías pequeñas.",
+        cultivo: "Extremadamente resistente a la sequía una vez establecido. Prefiere suelos bien drenados y pleno sol. Es ideal para xerojardinería y restauración de hábitats desérticos.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 2,
+        nombre: "Sahuaro",
+        nombreCientifico: "Carnegiea gigantea",
+        tipo: "cactaceas",
+        clima: "arido",
+        usos: ["ornamental", "comestible", "ritual"],
+        altura: "12-15 m",
+        riego: "Mínimo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Sahuaro es el cactus columnar más grande de Estados Unidos, símbolo del Desierto Sonorense. Puede vivir más de 150 años y almacena grandes cantidades de agua en su tronco para sobrevivir largas sequías.",
+        habitat: "Habita en las zonas más áridas del desierto de Sonora, en planicies rocosas y laderas de montañas bajas. Es resistente a temperaturas extremas y sequías prolongadas.",
+        usosTrad: "Sus frutos rojos son comestibles y tradicionalmente importantes para los pueblos O'odham. Se elaboran jaleas, vinos y siropes. Las costillas secas se han usado como material de construcción. Planta sagrada para los pueblos originarios.",
+        cultivo: "Crecimiento extremadamente lento. Necesita suelo muy bien drenado, pleno sol y protección contra heladas prolongadas. En cultivo, regar solo cuando el sustrato esté completamente seco.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 3,
+        nombre: "Mezquite",
+        nombreCientifico: "Prosopis velutina",
+        tipo: "arboles",
+        clima: "arido",
+        usos: ["ornamental", "comestible", "medicinal"],
+        altura: "3-9 m",
+        riego: "Bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Mezquite es un árbol fundamental en el ecosistema del desierto sonorense. Desarrolla raíces extremadamente profundas para alcanzar agua subterránea. Sus vainas son un recurso alimenticio importante para la fauna y humanos.",
+        habitat: "Se encuentra en valles, planicies aluviales y cauces de arroyos secos. Sus raíces pueden profundizar hasta 50 metros buscando agua.",
+        usosTrad: "Las vainas molidas producen una harina dulce nutricionalmente rica. La madera es excelente para construcción, fabricación de herramientas y como leña. La goma que exuda tiene propiedades medicinales para problemas digestivos.",
+        cultivo: "Extremadamente resistente a la sequía. Prefiere pleno sol y suelos bien drenados. No requiere fertilización y puede prosperar en suelos pobres. Sus raíces pueden ser invasivas cerca de estructuras.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 4,
+        nombre: "Ocotillo",
+        nombreCientifico: "Fouquieria splendens",
+        tipo: "arbustos",
+        clima: "arido",
+        usos: ["ornamental", "medicinal"],
+        altura: "2-7 m",
+        riego: "Muy bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Ocotillo es un arbusto desértico con tallos largos y espinosos que crecen desde la base en forma de abanico. Sus brillantes flores rojas aparecen en las puntas de los tallos después de las lluvias.",
+        habitat: "Crece en laderas rocosas, planicies desérticas y colinas bajas en zonas áridas. Puede sobrevivir con tan solo 7-10 cm de precipitación anual.",
+        usosTrad: "Las flores se utilizan en infusiones para problemas respiratorios. Los tallos se han utilizado tradicionalmente para hacer cercas vivas y en la construcción de techos. La corteza tiene propiedades medicinales.",
+        cultivo: "Requiere pleno sol y suelo excepcionalmente bien drenado. No tolera el exceso de humedad. Las hojas aparecen rápidamente después de las lluvias y caen durante los períodos secos para conservar agua.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 5,
+        nombre: "Cholla",
+        nombreCientifico: "Cylindropuntia fulgida",
+        tipo: "cactaceas",
+        clima: "arido",
+        usos: ["ornamental"],
+        altura: "1-3 m",
+        riego: "Mínimo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "La Cholla, también conocida como 'cholla saltarina', es famosa por sus segmentos que se desprenden fácilmente y se adhieren a la ropa o piel. Esta estrategia facilita su propagación vegetativa.",
+        habitat: "Prospera en planicies desérticas y valles bajos. Puede formar 'bosques' densos en algunas zonas del desierto sonorense.",
+        usosTrad: "Los capullos florales se han consumido tradicionalmente después de un elaborado proceso de preparación. Algunas comunidades utilizan las espinas para tatuajes ceremoniales. Los esqueletos leñosos secos se utilizan para artesanías.",
+        cultivo: "Necesita pleno sol y suelo con excelente drenaje. No requiere riego una vez establecida. Manipular con extrema precaución usando guantes gruesos debido a sus espinas barbed.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 6,
+        nombre: "Palo Fierro",
+        nombreCientifico: "Olneya tesota",
+        tipo: "arboles",
+        clima: "arido",
+        usos: ["ornamental", "comestible", "medicinal"],
+        altura: "5-10 m",
+        riego: "Bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Palo Fierro o 'Ironwood' es un árbol leguminoso de crecimiento lento y excepcional dureza. Su madera es una de las más densas del mundo y puede vivir más de 1,500 años.",
+        habitat: "Crece exclusivamente en el Desierto Sonorense, principalmente en arroyos secos, cauces y planicies bajas con buen drenaje.",
+        usosTrad: "Las semillas tostadas son comestibles con sabor similar al cacahuate. La durísima madera se utiliza para tallas artísticas finas, siendo un arte tradicional sonorense. Tiene usos medicinales para problemas articulares.",
+        cultivo: "Extremadamente resistente a la sequía. Prefiere pleno sol y suelos arenosos bien drenados. Crece lentamente y no tolera las heladas prolongadas. Fija nitrógeno, mejorando el suelo.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 7,
+        nombre: "Gobernadora",
+        nombreCientifico: "Larrea tridentata",
+        tipo: "arbustos",
+        clima: "arido",
+        usos: ["medicinal"],
+        altura: "1-3 m",
+        riego: "Mínimo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "La Gobernadora o 'Creosote bush' es posiblemente la planta más característica del desierto sonorense. Su aroma distintivo tras la lluvia es el 'olor a desierto'. Tiene propiedades alelopáticas que impiden el crecimiento de otras plantas cerca.",
+        habitat: "Domina grandes extensiones de planicies desérticas y laderas bajas. Es extremadamente resistente a la sequía y puede vivir con muy poca agua.",
+        usosTrad: "Planta medicinal importante para los pueblos nativos. Se usa para infecciones, artritis, problemas digestivos y como antiséptico. La resina se aplica en heridas y como fijador de pigmentos en cestería tradicional.",
+        cultivo: "Extremadamente adaptada a condiciones áridas. Requiere pleno sol y suelo pobre con excelente drenaje. Prácticamente no requiere riego una vez establecida y vive décadas.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 8,
+        nombre: "Copal",
+        nombreCientifico: "Bursera hindsiana",
+        tipo: "arboles",
+        clima: "arido",
+        usos: ["ritual", "medicinal"],
+        altura: "2-5 m",
+        riego: "Bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Copal o 'torote' es un árbol aromático con corteza exfoliante. Produce una resina fragante muy apreciada para ceremonias tradicionales. Su tronco almacena agua para sobrevivir sequías.",
+        habitat: "Crece en colinas rocosas y laderas de cañones en las regiones más áridas de Sonora. Prefiere suelos bien drenados y exposición solar directa.",
+        usosTrad: "La resina se quema como incienso en ceremonias religiosas y rituales de purificación. Tiene propiedades medicinales para problemas respiratorios y dolores musculares. La corteza y hojas se usan en infusiones para problemas digestivos.",
+        cultivo: "Requiere excelente drenaje y pleno sol. Sensible al exceso de humedad y a las heladas. De crecimiento lento pero extremadamente resistente a la sequía una vez establecido.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 9,
+        nombre: "Pitahaya Agria",
+        nombreCientifico: "Stenocereus gummosus",
+        tipo: "cactaceas",
+        clima: "arido",
+        usos: ["comestible", "medicinal"],
+        altura: "1-2 m",
+        riego: "Muy bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "La Pitahaya Agria es un cactus columnar ramificado que produce frutos deliciosos de color rojo intenso. Sus flores nocturnas son grandes y blancas, polinizadas por murciélagos.",
+        habitat: "Crece en planicies rocosas y laderas bajas en las zonas más áridas de Sonora, especialmente en la región costera.",
+        usosTrad: "Los frutos son comestibles y tradicionalmente importantes para los pueblos Seri y Yaqui. Se elaboran bebidas, mermeladas y postres. La pulpa tiene propiedades medicinales para problemas digestivos y como cicatrizante.",
+        cultivo: "Requiere pleno sol y suelo extremadamente bien drenado. No tolera heladas ni exceso de humedad. En cultivo, esperar a que el sustrato esté completamente seco antes de regar.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 10,
+        nombre: "Jojoba",
+        nombreCientifico: "Simmondsia chinensis",
+        tipo: "arbustos",
+        clima: "arido",
+        usos: ["medicinal", "comestible"],
+        altura: "1-3 m",
+        riego: "Bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "La Jojoba es un arbusto perenne de hojas gruesas y cerosas. Produce semillas que contienen un aceite líquido similar a la cera que no se enrancia y tiene propiedades similares al aceite de ballena.",
+        habitat: "Crece en laderas desérticas, mesetas y cañones rocosos en las zonas áridas de Sonora. Prefiere suelos bien drenados y exposición solar directa.",
+        usosTrad: "Las semillas se consumen tostadas y tienen propiedades nutricionales. El aceite se utiliza tradicionalmente para el cuidado del cabello, piel y como tratamiento para quemaduras solares. Tiene usos medicinales para problemas articulares.",
+        cultivo: "Extremadamente resistente a la sequía. Prefiere pleno sol y suelos pobres con excelente drenaje. De crecimiento lento pero muy longevo. Ideal para xerojardinería.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 11,
+        nombre: "Chiltepin",
+        nombreCientifico: "Capsicum annuum var. glabriusculum",
+        tipo: "arbustos",
+        clima: "semi-arido",
+        usos: ["comestible", "medicinal"],
+        altura: "0.5-1.5 m",
+        riego: "Moderado",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "El Chiltepin es considerado el chile silvestre ancestral de México. Produce pequeños frutos esféricos extremadamente picantes que son muy apreciados en la gastronomía sonorense.",
+        habitat: "Crece naturalmente bajo la sombra parcial de árboles más grandes, especialmente en cañones húmedos y arroyos estacionales en las zonas de transición entre desierto y bosque tropical caducifolio.",
+        usosTrad: "Ingrediente esencial en la cocina sonorense, se utiliza en salsas, escabeches y como condimento. Tiene propiedades medicinales como analgésico, para problemas digestivos y circulatorios. Se utiliza también como repelente natural de plagas.",
+        cultivo: "Prefiere sombra parcial y suelo rico en materia orgánica con buen drenaje. Necesita más agua que otras plantas nativas pero es relativamente resistente a la sequía una vez establecido.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
+      },
+      {
+        id: 12,
+        nombre: "Amapola del Desierto",
+        nombreCientifico: "Eschscholzia californica ssp. mexicana",
+        tipo: "hierbas",
+        clima: "semi-arido",
+        usos: ["ornamental", "medicinal"],
+        altura: "30-60 cm",
+        riego: "Bajo",
+        imagen: "/api/placeholder/400/300",
+        descripcion: "La Amapola del Desierto es una hermosa planta anual que produce flores naranjas o amarillas brillantes. Florece espectacularmente después de las lluvias, cubriendo el paisaje desértico con explosiones de color.",
+        habitat: "Crece en planicies desérticas, laderas rocosas y bordes de caminos. Se adapta bien a suelos arenosos y prefiere zonas con inviernos suaves y primaveras húmedas.",
+        usosTrad: "Las flores se han utilizado tradicionalmente para hacer infusiones calmantes y para aliviar dolores de cabeza. Tiene propiedades suavemente sedantes. El polen se ha usado como colorante natural.",
+        cultivo: "Fácil de cultivar a partir de semillas sembradas directamente en otoño. Prefiere pleno sol y suelo bien drenado. Una vez establecida requiere poco riego. Se autopoliniza y puede naturalizarse fácilmente.",
+        galeria: [
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300",
+          "/api/placeholder/400/300"
+        ]
       }
+    ];
+
+    // Función para generar las tarjetas de las plantas
+    function generarTarjetas(plantas) {
+      const galeria = document.getElementById('galeria');
+      galeria.innerHTML = '';
+      
+      plantas.forEach(planta => {
+        const card = document.createElement('div');
+        card.className = 'planta-card';
+        card.setAttribute('data-id', planta.id);
+        
+        card.innerHTML = `
+          <img src="${planta.imagen}" alt="${planta.nombre}">
+          <div class="card-content">
+            <h3>${planta.nombre}</h3>
+            <p><em>${planta.nombreCientifico}</em></p>
+            <div class="etiquetas">
+              <span class="etiqueta">${formatearTipo(planta.tipo)}</span>
+              ${planta.usos.map(uso => `<span class="etiqueta">${formatearUso(uso)}</span>`).join('')}
+            </div>
+          </div>
+        `;
+        
+        card.addEventListener('click', () => abrirModal(planta.id));
+        galeria.appendChild(card);
+      });
     }
+    
+    // Formatear los tipos de plantas para mostrar
+    function formatearTipo(tipo) {
+      const tipos = {
+        'arboles': 'Árbol',
+        'arbustos': 'Arbusto',
+        'cactaceas': 'Cactácea',
+        'hierbas': 'Hierba'
+      };
+      return tipos[tipo] || tipo;
+    }
+    
+    // Formatear los usos para mostrar
+    function formatearUso(uso) {
+      const usos = {
+        'ornamental': 'Ornamental',
+        'medicinal': 'Medicinal',
+        'comestible': 'Comestible',
+        'ritual': 'Ceremonial'
+      };
+      return usos[uso] || uso;
+    }
+    
+    // Función para abrir el modal con la información detallada
+    function abrirModal(id) {
+      const planta = plantasNativas.find(p => p.id === id);
+      if (!planta) return;
+      
+      document.getElementById('modalTitulo').textContent = planta.nombre;
+      document.getElementById('modalNombreCientifico').textContent = planta.nombreCientifico;
+      document.getElementById('modalImagen').src = planta.imagen;
+      document.getElementById('modalTipo').textContent = formatearTipo(planta.tipo);
+      document.getElementById('modalClima').textContent = formatearClima(planta.clima);
+      document.getElementById('modalAltura').textContent = planta.altura;
+      document.getElementById('modalRiego').textContent = planta.riego;
+      document.getElementById('modalDescripcion').textContent = planta.descripcion;
+      document.getElementById('modalHabitat').textContent = planta.habitat;
+      document.getElementById('modalUsos').textContent = planta.usosTrad;
+      document.getElementById('modalCultivo').textContent = planta.cultivo;
+      
+      // Generar galería
+      const galeriaEl = document.getElementById('modalGaleria');
+      galeriaEl.innerHTML = '';
+      planta.galeria.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'galeria-item';
+        item.innerHTML = `<img src="${img}" alt="${planta.nombre}">`;
+        galeriaEl.appendChild(item);
+      });
+      
+      document.getElementById('plantaModal').style.display = 'block';
+    }
+    
+    // Formatear el clima para mostrar
+    function formatearClima(clima) {
+      const climas = {
+        'arido': 'Árido',
+        'semi-arido': 'Semi-árido',
+        'templado': 'Templado'
+      };
+      return climas[clima] || clima;
+    }
+    
+    // Función para cerrar el modal
+    document.querySelector('.cerrar-modal').addEventListener('click', () => {
+      document.getElementById('plantaModal').style.display = 'none';
+    });
+    
+    // Función para cambiar entre pestañas en el modal
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Desactivar todas las pestañas
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('activo'));
+        document.querySelectorAll('.tab-contenido').forEach(c => c.classList.remove('activo'));
+        
+        // Activar la pestaña seleccionada
+        tab.classList.add('activo');
+        const tabId = tab.getAttribute('data-tab');
+        document.getElementById(tabId).classList.add('activo');
+      });
+    });
+    
+    // Cerrar modal si se hace clic fuera del contenido
+    window.addEventListener('click', (e) => {
+      const modal = document.getElementById('plantaModal');
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+    
+    // Aplicar filtros
+    document.getElementById('aplicarFiltros').addEventListener('click', () => {
+      const tipoSeleccionado = document.getElementById('tipoPlanta').value;
+      const climaSeleccionado = document.getElementById('clima').value;
+      const usoSeleccionado = document.getElementById('uso').value;
+      
+      const plantasFiltradas = plantasNativas.filter(planta => {
+        const coincideTipo = tipoSeleccionado === 'todas' || planta.tipo === tipoSeleccionado;
+        const coincideClima = climaSeleccionado === 'todos' || planta.clima === climaSeleccionado;
+        const coincideUso = usoSeleccionado === 'todos' || planta.usos.includes(usoSeleccionado);
+        
+        return coincideTipo && coincideClima && coincideUso;
+      });
+      
+      generarTarjetas(plantasFiltradas);
+    });
+    
+    // Restablecer filtros
+    document.getElementById('resetFiltros').addEventListener('click', () => {
+      document.getElementById('tipoPlanta').value = 'todas';
+      document.getElementById('clima').value = 'todos';
+      document.getElementById('uso').value = 'todos';
+      
+      generarTarjetas(plantasNativas);
+    });
+    
+    // Inicializar la página con todas las plantas
+    document.addEventListener('DOMContentLoaded', () => {
+      generarTarjetas(plantasNativas);
+    });
   </script>
 </body>
 </html>
